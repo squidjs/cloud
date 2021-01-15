@@ -7,7 +7,11 @@ export default class HostsController {
 	public async get({ auth }: HttpContextContract) {
 
 		await auth.authenticate();
-		const hosts = await Host.query().where('user_id', 1);
+
+        if(!auth.user)
+            return { error: 'Could not find user.' };
+
+        const hosts = await Host.query().where('user_id', auth.user?.id);
 		const json: { iv: string, content: string }[] = [];
 
 		hosts.forEach(({ iv, content }) => {
