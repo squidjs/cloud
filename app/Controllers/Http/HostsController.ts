@@ -43,6 +43,6 @@ export default class HostsController {
 			content,
 		});
 
-		return { success: true };
+		return { iv, content };
 	}
 }

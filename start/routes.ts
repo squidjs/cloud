@@ -28,7 +28,7 @@ Route.post('/register', 'AuthController.register');
 Route.post('/login', 'AuthController.login');
 
 Route.get('/hosts', 'HostsController.get');
-Route.post('/hosts/create', 'HostsController.create');
+Route.post('/hosts', 'HostsController.create');
 
 Route.get('/dashboard', async({ auth }) => {
 	await auth.authenticate(); //  👈 All you need to go
