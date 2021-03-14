@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  squid_api:
+    build: .
+    ports:
+      - "3333:3333"
+    container_name: api
+    env_file:
+      - squid-config.env
+    depends_on:
+      - squid_redis
+  squid_redis:
+    image: redis
+    container_name: redis
+  squid_db:
+    image: mariadb
+    container_name: db
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=squid
+      - MYSQL_PASSWORD=squid
+      - MYSQL_DATABASE=squid
+volumes:
+  db_data:
+    driver: local
